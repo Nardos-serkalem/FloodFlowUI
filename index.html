@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethiopia Flood Alert System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Ethiopic:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="lib/leaflet/leaflet.css">
+    <style>
+        body.dark-motion-bg {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                        url('assets/images/flood-bg.jpg') center/cover fixed;
+            min-height: 100vh;
+            color: #ffffff;
+        }
+
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            padding: 25px 0;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 10px;
+            margin: 20px auto;
+            width: fit-content;
+            padding: 20px;
+        }
+
+        #map-container {
+            height: 500px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 20px auto;
+            border-radius: 8px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            position: relative;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
+        }
+
+        #input-area, #results-area {
+            background: rgba(0, 0, 0, 0.6) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            margin: 20px auto;
+            width: 90%;
+            max-width: 800px;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        select, button {
+            background: rgba(255, 255, 255, 0.1) !important;
+            color: #fff !important;
+            border: 1px solid rgba(255, 255, 255, 0.3) !important;
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 6px;
+        }
+    </style>
+</head>
+<body class="dark-motion-bg">
+    <div id="alert-banner" class="alert">
+        <span class="close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <div id="alert-content"></div>
+    </div>
+
+    <header>
+        <img src="assets/images/ssgi.png" alt="System Logo" height="80">
+        <h1>Ethiopia Flood Alert System</h1>
+    </header>
+    
+    <main>
+        <div id="input-area">
+            <h2>Select High-Risk Area</h2>
+            <select id="area-select">
+                <option value="">Choose Flood-Prone Area</option>
+                <option value="Adama" data-risk="High">Adama (High Risk)</option>
+                <option value="Dire Dawa" data-risk="Critical">Dire Dawa (Critical Risk)</option>
+                <option value="Hareri" data-risk="Medium">Hareri (Medium Risk)</option>
+                <option value="Omo" data-risk="High">Omo River Basin (High Risk)</option>
+                <option value="Afar" data-risk="Critical">Afar Depression (Critical Risk)</option>
+            </select>
+
+            <label for="timeframe">Prediction Window:</label>
+            <select id="timeframe">
+                <option value="1h">Next 1 Hour</option>
+                <option value="3h">Next 3 Hours</option>
+                <option value="6h">Next 6 Hours</option>
+                <option value="12h">Next 12 Hours</option>
+                <option value="24h">Next 24 Hours</option>
+            </select>
+            
+            <button id="predict-button">Generate Flood Forecast</button>
+        </div>
+
+        <div id="map-container"></div>
+
+        <div id="results-area">
+            <p>Flood analysis results will appear here</p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Ethiopia Flood Alert System</p>
+    </footer>
+
+    <script src="lib/leaflet/leaflet.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
